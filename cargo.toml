@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "dag",
+    "dag_cli",
+
+]
