@@ -1,6 +1,15 @@
 use std::fmt;
 pub trait DAGStats {
     fn calculate(&self) -> DAGStatsData;
+    fn get_average_depth(&self) -> f64;
+    fn get_average_nodes_per_depth(&self) -> f64;
+    fn get_average_in_references(&self) -> f64;
+    fn get_max_depth(&self) -> usize;
+    fn get_nodes_count(&self) -> usize;
+    fn get_edges_count(&self) -> usize;
+    fn get_nodes_with_no_incoming_edges(&self) -> usize;
+    fn get_isolated_nodes_count(&self) -> usize;
+
 }
 
 impl fmt::Display for DAGStatsData {
