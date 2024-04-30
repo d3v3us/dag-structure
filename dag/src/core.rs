@@ -23,10 +23,9 @@ impl ExistingFile {
         }
     }
    
-    pub fn read_lines<'a>(&'a self) -> impl Iterator<Item = String> + 'a {
+    pub fn read_lines(&self) -> impl Iterator<Item = String>  + '_ {
         let buffered_reader = BufReader::new(&self.0);
-        let lines = buffered_reader.lines().map(|line| line.unwrap());
-        lines
+        buffered_reader.lines().map(|line| line.unwrap())
     }
 
     

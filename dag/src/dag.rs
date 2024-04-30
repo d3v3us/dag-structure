@@ -11,6 +11,11 @@ use crate::stats::*;
 pub struct Dag {
     root: Pointer<Node>,
 }
+impl Default for Dag {
+    fn default() -> Self {
+      Self::new()
+   }
+  }
 impl Dag {
     pub fn new() -> Self {
         Dag {
@@ -98,13 +103,11 @@ impl DAGStats for Dag {
 
         let total_depths = counts.len() as f64;
         let total_nodes: usize = counts.iter().sum();
-        let average_nodes = if total_depths > 0.0 {
+        if total_depths > 0.0 {
             total_nodes as f64 / total_depths
         } else {
             0.0
-        };
-
-        average_nodes
+        }
     }
 
     fn get_average_in_references(&self) -> f64 {
@@ -197,7 +200,7 @@ impl From<ExistingFile> for DagFileData {
             match i {
                 0 => {
                     n = vals[0];
-                    nodes.push((1 as i128, -1, -1));
+                    nodes.push((1, -1, -1));
                 }
                 _ if i + 1 == n as usize => {
                     ne = (n, vals[0], vals[1]);

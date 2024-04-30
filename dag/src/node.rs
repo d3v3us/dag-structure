@@ -29,7 +29,7 @@ impl<T> Pointer<T> {
         res
     }
     pub fn is_clone_of(&self, other: &Pointer<T>) -> bool {
-        Rc::ptr_eq(&self.0.as_ref().unwrap(), &other.0.as_ref().unwrap())
+        Rc::ptr_eq(self.0.as_ref().unwrap(), other.0.as_ref().unwrap())
     }
     pub fn is_none(&self) -> bool {
         self.0.is_none()
@@ -46,14 +46,14 @@ pub struct Node {
 impl Display for Node {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         fn display_with_depth(node: &Node, f: &mut Formatter<'_>, depth: usize) -> std::fmt::Result {
-            write!(f, "{:indent$}[{} \n", "", node.val, indent = depth * 4)?;
+            writeln!(f, "{:indent$}[{}", "", node.val, indent = depth * 4)?;
             if !node.left.is_none() {
                 display_with_depth(&node.left.as_ref(),f, depth + 1)?;
             }
             if !node.right.is_none() {
                 display_with_depth(&node.right.as_ref(),f, depth + 1)?;
             }
-            write!(f, "{:indent$}]\n", "", indent = depth * 4)
+            writeln!(f, "{:indent$}]", "", indent = depth * 4)
         }
 
         display_with_depth(self,f, 0)
